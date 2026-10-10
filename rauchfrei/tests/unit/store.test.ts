@@ -10,7 +10,7 @@ import {
 } from '../../src/storage/store';
 
 const state = (): AppState => ({
-  schemaVersion: 1,
+  schemaVersion: 2,
   createdAt: '2026-10-10',
   attempts: [{ startDate: '2026-10-10', slips: [{ date: '2026-10-12', trigger: 'stress' }] }],
   smoking: { cigarettesPerDay: 15, pricePerPack: 8.5, cigarettesPerPack: 20 },
@@ -82,6 +82,13 @@ describe('loadState', () => {
     const { storage } = memoryStorage({ state: '{"other":"app"}' });
 
     expect(loadState(storage)).toEqual({ status: 'empty' });
+  });
+
+  it('upgrades data saved by the first app version', () => {
+    const stored = JSON.stringify({ ...state(), schemaVersion: 1 });
+    const { storage } = memoryStorage({ [STATE_KEY]: stored });
+
+    expect(loadState(storage)).toEqual({ status: 'ok', state: state() });
   });
 
   it('reports broken JSON as corrupt instead of throwing', () => {

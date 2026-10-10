@@ -1,7 +1,7 @@
 import ui from '../content/ui.json';
 import { checkStartDate } from '../core/dates';
 import { parseDecimal } from '../core/savings';
-import type { SmokingInfo } from '../storage/schema';
+import { MAX_START_UNCERTAINTY_DAYS, type SmokingInfo } from '../storage/schema';
 import { href, type Route } from './context';
 import { el } from './dom';
 import { icon, type IconName } from './icons';
@@ -42,23 +42,53 @@ export function showError(node: HTMLElement, message: string | null): void {
 
 export interface StartDateField {
   node: HTMLElement;
-  /** The chosen date, or the message to show if it cannot be used. */
-  read(): { ok: true; startDate: string } | { ok: false; error: string };
+  /** The chosen date and its optional "give or take", or the message to show. */
+  read(): { ok: true; startDate: string; uncertaintyDays?: number } | { ok: false; error: string };
 }
 
-export function startDateField(value: string, today: string, label: string): StartDateField {
+function readUncertainty(input: string): number | null {
+  if (input.trim() === '') return 0;
+  const days = parseDecimal(input);
+  const valid = days !== null && Number.isInteger(days) && days <= MAX_START_UNCERTAINTY_DAYS;
+  return valid ? days : null;
+}
+
+export function startDateField(
+  value: string,
+  today: string,
+  label: string,
+  uncertaintyDays?: number,
+): StartDateField {
   const input = el('input', { id: 'start', class: 'field', type: 'date', value, max: today });
+  const margin = el('input', {
+    id: 'margin',
+    class: 'field field--short',
+    type: 'text',
+    inputmode: 'numeric',
+    value: uncertaintyDays ?? '',
+    'aria-describedby': 'margin-note',
+  });
   const node = el(
     'div',
-    { class: 'card stack-s' },
-    el('label', { class: 'label', for: 'start' }, label),
-    input,
+    { class: 'card stack-m' },
+    el('div', { class: 'stack-s' }, el('label', { class: 'label', for: 'start' }, label), input),
+    el(
+      'div',
+      { class: 'stack-xs' },
+      el('label', { class: 'label-small', for: 'margin' }, ui.form.marginLabel),
+      margin,
+      el('div', { class: 'note', id: 'margin-note' }, ui.form.marginNote),
+    ),
   );
   const read: StartDateField['read'] = () => {
     const check = checkStartDate(input.value, today);
-    if (check === 'ok') return { ok: true, startDate: input.value };
-    const error = check === 'future' ? ui.form.errorStartFuture : ui.form.errorStartInvalid;
-    return { ok: false, error };
+    if (check === 'future') return { ok: false, error: ui.form.errorStartFuture };
+    if (check === 'invalid') return { ok: false, error: ui.form.errorStartInvalid };
+    const days = readUncertainty(margin.value);
+    if (days === null) return { ok: false, error: ui.form.errorMargin };
+    return days > 0
+      ? { ok: true, startDate: input.value, uncertaintyDays: days }
+      : { ok: true, startDate: input.value };
   };
   return { node, read };
 }

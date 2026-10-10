@@ -3,7 +3,7 @@ import { createBackupCode, readBackupCode } from '../../src/storage/backup';
 import type { AppState } from '../../src/storage/schema';
 
 const state = (): AppState => ({
-  schemaVersion: 1,
+  schemaVersion: 2,
   createdAt: '2026-05-01',
   attempts: [
     { startDate: '2026-01-01', slips: [] },
@@ -84,9 +84,16 @@ describe('backup code', () => {
   });
 
   it('rejects a backup from a newer app version', async () => {
-    expect(await readBackupCode(encode({ ...state(), schemaVersion: 2 }))).toEqual({
+    expect(await readBackupCode(encode({ ...state(), schemaVersion: 3 }))).toEqual({
       ok: false,
       reason: 'too-new',
+    });
+  });
+
+  it('upgrades a backup made by the first app version', async () => {
+    expect(await readBackupCode(encode({ ...state(), schemaVersion: 1 }))).toEqual({
+      ok: true,
+      state: state(),
     });
   });
 

@@ -3,7 +3,10 @@ import { SCHEMA_VERSION } from './schema';
 export type Migration = (state: Record<string, unknown>) => Record<string, unknown>;
 
 /** Keyed by the version a step upgrades from: `migrations[1]` turns v1 data into v2 data. */
-export const migrations: Readonly<Record<number, Migration>> = {};
+export const migrations: Readonly<Record<number, Migration>> = {
+  // v2 added the optional `startUncertaintyDays` of an attempt. Existing data needs no change.
+  1: (state) => state,
+};
 
 export type MigrationResult =
   | { ok: true; value: Record<string, unknown> }

@@ -31,6 +31,21 @@ describe('createState', () => {
     expect(state.attempts).toEqual([{ startDate: '2026-05-01', slips: [] }]);
   });
 
+  it('keeps how sure Anna is about the start, and leaves it out when exact', () => {
+    const unsure = createState('2026-05-01', TODAY, undefined, 5);
+
+    expect(unsure.attempts[0]).toEqual({
+      startDate: '2026-05-01',
+      startUncertaintyDays: 5,
+      slips: [],
+    });
+    expect(validateState(unsure).ok).toBe(true);
+    expect(createState('2026-05-01', TODAY, undefined, 0).attempts[0]).toEqual({
+      startDate: '2026-05-01',
+      slips: [],
+    });
+  });
+
   it('keeps the smoking details', () => {
     const smoking = { cigarettesPerDay: 15, pricePerPack: 8.9, cigarettesPerPack: 20 };
 
@@ -152,6 +167,27 @@ describe('changeStartDate', () => {
     expect(currentAttempt(changeStartDate(state, '2026-04-01', TODAY)!).startDate).toBe(
       '2026-04-01',
     );
+  });
+
+  it('sets and removes the start margin and keeps the slips', () => {
+    const withSlip = addSlip(state, '2026-06-01');
+    const unsure = changeStartDate(withSlip, '2026-05-01', TODAY, 7)!;
+
+    expect(currentAttempt(unsure)).toEqual({
+      startDate: '2026-05-01',
+      startUncertaintyDays: 7,
+      slips: [{ date: '2026-06-01' }],
+    });
+    expect(currentAttempt(changeStartDate(unsure, '2026-05-01', TODAY)!)).toEqual({
+      startDate: '2026-05-01',
+      slips: [{ date: '2026-06-01' }],
+    });
+  });
+
+  it('starts a new attempt without a margin', () => {
+    const unsure = changeStartDate(state, '2026-05-01', TODAY, 7)!;
+
+    expect(currentAttempt(restart(unsure, TODAY))).toEqual({ startDate: TODAY, slips: [] });
   });
 
   it('refuses a future or invalid date', () => {

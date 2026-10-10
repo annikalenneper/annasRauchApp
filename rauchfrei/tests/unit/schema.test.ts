@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { validateState, type AppState } from '../../src/storage/schema';
 
 const minimalState = (): AppState => ({
-  schemaVersion: 1,
+  schemaVersion: 2,
   createdAt: '2026-10-10',
   attempts: [{ startDate: '2026-10-10', slips: [] }],
   seenRewards: [],
@@ -10,7 +10,7 @@ const minimalState = (): AppState => ({
 });
 
 const fullState = (): AppState => ({
-  schemaVersion: 1,
+  schemaVersion: 2,
   createdAt: '2026-05-03',
   attempts: [
     { startDate: '2026-01-01', slips: [{ date: '2026-01-20' }] },
@@ -64,7 +64,7 @@ describe('validateState', () => {
   });
 
   it.each<[string, (state: Record<string, unknown>) => void]>([
-    ['a wrong schema version', (s) => (s.schemaVersion = 2)],
+    ['a wrong schema version', (s) => (s.schemaVersion = 3)],
     ['a missing schema version', (s) => delete s.schemaVersion],
     ['an unknown field', (s) => (s.extra = true)],
     ['an invalid createdAt', (s) => (s.createdAt = '2026-02-30')],
@@ -74,6 +74,10 @@ describe('validateState', () => {
     ['an attempt that is not an object', (s) => (s.attempts = ['2026-01-01'])],
     ['an invalid start date', (s) => (firstAttempt(s).startDate = 'gestern')],
     ['slips that are not a list', (s) => (firstAttempt(s).slips = null)],
+    ['a start margin of 0', (s) => (firstAttempt(s).startUncertaintyDays = 0)],
+    ['a fractional start margin', (s) => (firstAttempt(s).startUncertaintyDays = 2.5)],
+    ['a start margin above a year', (s) => (firstAttempt(s).startUncertaintyDays = 366)],
+    ['a start margin given as text', (s) => (firstAttempt(s).startUncertaintyDays = '5')],
     ['a slip without date', (s) => (firstAttempt(s).slips = [{}])],
     ['a slip with an invalid date', (s) => (firstAttempt(s).slips = [{ date: '2026-13-01' }])],
     [
@@ -112,6 +116,12 @@ describe('validateState', () => {
     );
 
     expect(validateState(state).ok).toBe(true);
+  });
+
+  it('accepts and keeps a start margin', () => {
+    const result = validateState(withChange((s) => (firstAttempt(s).startUncertaintyDays = 5)));
+
+    expect(result.ok && result.state.attempts[0]).toMatchObject({ startUncertaintyDays: 5 });
   });
 
   it('names the offending field', () => {

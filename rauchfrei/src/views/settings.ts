@@ -15,10 +15,10 @@ import { backLink, errorText, showError, smokingFields, startDateField } from '.
 
 function applySettings(
   ctx: AppContext,
-  startDate: string,
+  start: { startDate: string; uncertaintyDays?: number },
   smoking: SmokingInfo | undefined,
 ): AppState | null {
-  const moved = changeStartDate(ctx.state, startDate, ctx.today);
+  const moved = changeStartDate(ctx.state, start.startDate, ctx.today, start.uncertaintyDays);
   if (!moved) return null;
   const days = smokeFreeDays(currentAttempt(moved), ctx.today);
   const next: AppState = {
@@ -49,10 +49,12 @@ function history(ctx: AppContext): HTMLElement | false {
 
 /** Correct the start date and the smoking details; shows earlier attempts. */
 export function renderSettings(ctx: AppContext): HTMLElement {
+  const attempt = currentAttempt(ctx.state);
   const date = startDateField(
-    currentAttempt(ctx.state).startDate,
+    attempt.startDate,
     ctx.today,
     ui.settings.startTitle,
+    attempt.startUncertaintyDays,
   );
   const smoking = smokingFields(ctx.state.smoking);
   const error = errorText();
@@ -63,7 +65,7 @@ export function renderSettings(ctx: AppContext): HTMLElement {
     const details = smoking.read();
     if (!chosen.ok) return showError(error, chosen.error);
     if (!details.ok) return showError(error, details.error);
-    const next = applySettings(ctx, chosen.startDate, details.smoking);
+    const next = applySettings(ctx, chosen, details.smoking);
     if (next && ctx.save(next)) return ctx.go('start');
     showError(error, ui.form.errorSave);
   };

@@ -33,7 +33,17 @@ function counterCard(ctx: AppContext, free: number, total: number): HTMLElement 
       'p',
       { class: 'counter' },
       el('span', { class: 'counter__number' }, formatNumber(free)),
-      el('span', { class: 'counter__unit' }, dayWord(free)),
+      el(
+        'span',
+        { class: 'counter__side' },
+        attempt.startUncertaintyDays !== undefined &&
+          el(
+            'span',
+            { class: 'counter__margin' },
+            fillText(ui.home.margin, { tage: attempt.startUncertaintyDays }),
+          ),
+        el('span', { class: 'counter__unit' }, dayWord(free)),
+      ),
     ),
     free !== total &&
       el('p', { class: 'meta' }, fillText(ui.home.ofDays, { rauchfrei: free, gesamt: total })),

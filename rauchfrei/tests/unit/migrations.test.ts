@@ -15,6 +15,12 @@ describe('migrate', () => {
     }
   });
 
+  it('upgrades v1 data to v2 without changing its content', () => {
+    const v1 = { schemaVersion: 1, attempts: [{ startDate: '2026-05-01', slips: [] }] };
+
+    expect(migrate(v1)).toEqual({ ok: true, value: { ...v1, schemaVersion: 2 } });
+  });
+
   it('runs a test migration chain up to the target version', () => {
     const steps: Record<number, Migration> = {
       1: (state) => ({ ...state, seenRewards: [] }),

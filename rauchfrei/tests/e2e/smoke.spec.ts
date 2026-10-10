@@ -214,6 +214,29 @@ test('settings correct the start date and the savings', async ({ page }) => {
   await expect(page.getByText('Meilenstein · 7 Tage')).toBeVisible();
 });
 
+test('an uncertain start shows a small plus/minus next to the number', async ({ page }) => {
+  const margin = page.getByLabel(/Plus\/minus wie viele Tage/);
+  await open(page);
+  await page.getByLabel('Seit wann rauchst du nicht mehr?').fill('2026-05-01');
+  await margin.fill('5');
+  await page.getByRole('button', { name: 'Los geht’s' }).click();
+  await dismissRewards(page);
+
+  await expect(page.locator('.counter__number')).toHaveText('162');
+  await expect(page.locator('.counter__margin')).toHaveText('± 5');
+  await shot(page, '2-startseite-ungefaehr');
+
+  await page.getByRole('link', { name: 'Einstellungen' }).click();
+  await expect(margin).toHaveValue('5');
+  await margin.fill('viele');
+  await page.getByRole('button', { name: 'Speichern' }).click();
+  await expect(page.getByRole('alert')).toContainText('ganze Zahl');
+  await margin.fill('');
+  await page.getByRole('button', { name: 'Speichern' }).click();
+  await expect(page.locator('.counter__number')).toHaveText('162');
+  await expect(page.locator('.counter__margin')).toHaveCount(0);
+});
+
 test('the homescreen hint can be closed for good', async ({ page }) => {
   await open(page, seededState());
   await dismissRewards(page);

@@ -79,6 +79,7 @@ Legende: ⬜ offen · 🔄 in Arbeit · ✅ fertig · ⏸ pausiert
 | E26 | 10.10.2026 | Zusätzliche Screens im selben Stil: Einstellungen (Startdatum, Ersparnis, Versuche), Wiederherstellen, Schatzkästchen-Liste, Notizfeld beim Auslöser | Abschnitt 3 des Plans verlangt sie, die Mockups zeigen sie nicht |
 | E27 | 10.10.2026 | Playwright-Smoke-Test läuft lokal (`npm run test:e2e`), nicht im Deployment | Hält das Deployment schnell und unabhängig vom Browser-Download |
 | E28 | 10.10.2026 | Hotline geprüft auf rauchfrei-info.de/unterstuetzung/telefonberatung/: 0800 8 31 31 31, kostenfrei, Mo–Do 10–22 Uhr, Fr–So 10–18 Uhr, keine Beratung am 24.–26.12. | Vorgabe aus dem Plan |
+| E29 | 10.10.2026 | Anna kann zum Startdatum eine Abweichung „plus/minus x Tage“ angeben (1 bis 365, optional). Sie steht klein neben der großen Zahl. Zähler, Ersparnis und Belohnungen rechnen weiter mit dem eingetragenen Datum. Neues Feld `startUncertaintyDays` am Versuch, Schema-Version 2 mit Migration | Wunsch der Nutzerin: Anna weiß den Start nicht mehr genau |
 
 ---
 
@@ -100,3 +101,7 @@ _Pro Etappe eine Zeile, z. B.: „Etappe 1 – 12.10.2026 – Prinzipien eingeha
 - Gerüst, Deployment, Datenmodell, Speicher, Kernlogik, alle Screens nach `design/`, Inhalte im Anna-Ton, Sicherung mit QR-Code, Hilfe-Bereich.
 - Vor dem überarbeiteten Plan hatte die Nutzerin die leere App schon auf dem iPhone getestet (Home-Bildschirm, Start im Flugmodus). iOS zeigt dabei einen Systemhinweis „Flugmodus ausschalten“, die App läuft trotzdem.
 - Nächster Schritt: Etappe 3, Rückmeldungen der Nutzerin und von Anna einarbeiten.
+
+### 10.10.2026 – Etappe 3, erste Rückmeldung
+- Abweichung „±“ zum Startdatum eingebaut (E29), beim ersten Start und in den Einstellungen. Bestehende Daten und alte Sicherungscodes werden automatisch auf Schema 2 gehoben.
+- Die Nutzerin hat überlegt, die Sicherung wegzulassen, und sich dagegen entschieden: Sie bleibt.

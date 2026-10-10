@@ -1,15 +1,37 @@
-import type { AppState, Attempt, Slip, SmokingInfo, Trigger } from '../storage/schema';
+import {
+  SCHEMA_VERSION,
+  type AppState,
+  type Attempt,
+  type Slip,
+  type SmokingInfo,
+  type Trigger,
+} from '../storage/schema';
 import { addDays, checkStartDate, daysBetween } from './dates';
 
 export const REPEATED_TRIGGER_THRESHOLD = 3;
 export const FREQUENT_SLIP_THRESHOLD = 3;
 export const FREQUENT_SLIP_WINDOW_DAYS = 14;
 
-export function createState(startDate: string, today: string, smoking?: SmokingInfo): AppState {
+function newAttempt(
+  startDate: string,
+  uncertaintyDays: number | undefined,
+  slips: Slip[],
+): Attempt {
+  const attempt: Attempt = { startDate, slips };
+  if (uncertaintyDays) attempt.startUncertaintyDays = uncertaintyDays;
+  return attempt;
+}
+
+export function createState(
+  startDate: string,
+  today: string,
+  smoking?: SmokingInfo,
+  uncertaintyDays?: number,
+): AppState {
   const state: AppState = {
-    schemaVersion: 1,
+    schemaVersion: SCHEMA_VERSION,
     createdAt: today,
-    attempts: [{ startDate, slips: [] }],
+    attempts: [newAttempt(startDate, uncertaintyDays, [])],
     seenRewards: [],
     settings: { homescreenHintDismissed: false },
   };
@@ -71,14 +93,19 @@ export function restart(state: AppState, today: string): AppState {
   return { ...state, attempts: [...state.attempts, { startDate: today, slips: [] }] };
 }
 
-/** Corrects the start of the current attempt. Returns null for an invalid or future date. */
+/**
+ * Corrects the start of the current attempt and how sure Anna is about it.
+ * Returns null for an invalid or future date.
+ */
 export function changeStartDate(
   state: AppState,
   startDate: string,
   today: string,
+  uncertaintyDays?: number,
 ): AppState | null {
   if (checkStartDate(startDate, today) !== 'ok') return null;
-  return replaceCurrentAttempt(state, { ...currentAttempt(state), startDate });
+  const slips = currentAttempt(state).slips;
+  return replaceCurrentAttempt(state, newAttempt(startDate, uncertaintyDays, slips));
 }
 
 export interface AttemptSummary {

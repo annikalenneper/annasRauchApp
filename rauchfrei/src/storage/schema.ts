@@ -1,7 +1,8 @@
 import { isIsoDate } from '../core/dates';
 
-export const SCHEMA_VERSION = 1;
+export const SCHEMA_VERSION = 2;
 export const MAX_NOTE_LENGTH = 200;
+export const MAX_START_UNCERTAINTY_DAYS = 365;
 
 export const TRIGGERS = [
   'stress',
@@ -22,6 +23,8 @@ export interface Slip {
 
 export interface Attempt {
   startDate: string;
+  /** "Give or take this many days" when the exact start is not known. Left out when exact. */
+  startUncertaintyDays?: number;
   slips: Slip[];
 }
 
@@ -91,6 +94,13 @@ function asNote(value: unknown, path: string): string {
     : fail(path, `a string of at most ${MAX_NOTE_LENGTH} characters`);
 }
 
+function asUncertainty(value: unknown, path: string): number {
+  const days = asPositiveNumber(value, path);
+  return Number.isInteger(days) && days <= MAX_START_UNCERTAINTY_DAYS
+    ? days
+    : fail(path, `a whole number up to ${MAX_START_UNCERTAINTY_DAYS}`);
+}
+
 function parseSlip(value: unknown, path: string): Slip {
   const record = asRecord(value, path, ['date', 'trigger', 'note']);
   const slip: Slip = { date: asDate(record.date, `${path}.date`) };
@@ -100,13 +110,20 @@ function parseSlip(value: unknown, path: string): Slip {
 }
 
 function parseAttempt(value: unknown, path: string): Attempt {
-  const record = asRecord(value, path, ['startDate', 'slips']);
-  return {
+  const record = asRecord(value, path, ['startDate', 'startUncertaintyDays', 'slips']);
+  const attempt: Attempt = {
     startDate: asDate(record.startDate, `${path}.startDate`),
     slips: asArray(record.slips, `${path}.slips`).map((slip, index) =>
       parseSlip(slip, `${path}.slips[${index}]`),
     ),
   };
+  if (record.startUncertaintyDays !== undefined) {
+    attempt.startUncertaintyDays = asUncertainty(
+      record.startUncertaintyDays,
+      `${path}.startUncertaintyDays`,
+    );
+  }
+  return attempt;
 }
 
 function parseSmoking(value: unknown, path: string): SmokingInfo {

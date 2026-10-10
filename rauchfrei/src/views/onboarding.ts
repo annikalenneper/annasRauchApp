@@ -17,7 +17,9 @@ export function renderOnboarding(today: string, start: (state: AppState) => bool
     const details = smoking.read();
     if (!chosen.ok) return showError(error, chosen.error);
     if (!details.ok) return showError(error, details.error);
-    const saved = start(createState(chosen.startDate, today, details.smoking));
+    const saved = start(
+      createState(chosen.startDate, today, details.smoking, chosen.uncertaintyDays),
+    );
     showError(error, saved ? null : ui.form.errorSave);
   };
 

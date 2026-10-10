@@ -24,7 +24,10 @@
     "errorStartFuture": "Das Datum liegt in der Zukunft. Nimm heute oder einen früheren Tag.",
     "errorSmokingIncomplete": "Für die Ersparnis brauche ich Zigaretten pro Tag und den Preis. Oder lass beide Felder leer.",
     "errorSmokingNumbers": "Bitte gib hier Zahlen größer als 0 ein, zum Beispiel 15 und 8,90.",
-    "errorSave": "Das Speichern hat gerade nicht geklappt. Versuch es bitte noch einmal."
+    "errorSave": "Das Speichern hat gerade nicht geklappt. Versuch es bitte noch einmal.",
+    "marginLabel": "Nicht mehr ganz sicher? Plus/minus wie viele Tage?",
+    "marginNote": "Optional – steht dann klein neben deiner Zahl.",
+    "errorMargin": "Für die Abweichung bitte eine ganze Zahl von 0 bis 365 eintragen. Oder lass das Feld leer."
   },
   "onboarding": {
     "title": "Anna, du machst das toll!",
@@ -46,7 +49,8 @@
     "setupSavings": "Ersparnis einrichten",
     "todayForYou": "Heute für dich",
     "longest": "Dein längster Versuch: {tage} Tage",
-    "reportSlip": "Ausrutscher melden"
+    "reportSlip": "Ausrutscher melden",
+    "margin": "± {tage}"
   },
   "homescreenHint": {
     "title": "Leg mich auf deinen Home-Bildschirm",
