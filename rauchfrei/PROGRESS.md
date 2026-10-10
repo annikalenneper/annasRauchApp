@@ -1,8 +1,8 @@
 # PROGRESS.md – Rauchfrei
 
-**Aktuelle Phase:** 0 – Gerüst und Deployment
+**Aktuelle Phase:** 2 – Kernlogik
 **Letzte Aktualisierung:** 10.10.2026
-**Status:** Phase 0 abgeschlossen. App ist unter https://annikalenneper.github.io/annasRauchApp/ erreichbar
+**Status:** Phase 0 und 1 abgeschlossen. Phase 1 ist lokal committet, noch nicht gepusht. Nächster Schritt: Phase 2
 
 ---
 
@@ -11,7 +11,7 @@
 | Phase | Inhalt | Status | Phasen-Check |
 |---|---|---|---|
 | 0 | Gerüst und Deployment | ✅ fertig | bestanden, 10.10.2026 |
-| 1 | Datenmodell und Speicher | ⬜ offen | – |
+| 1 | Datenmodell und Speicher | ✅ fertig | bestanden, 10.10.2026 |
 | 2 | Kernlogik | ⬜ offen | – |
 | 3 | Onboarding und Startseite | ⬜ offen | – |
 | 4 | Ausrutscher und Neustart | ⬜ offen | – |
@@ -28,7 +28,16 @@ Legende: ⬜ offen · 🔄 in Arbeit · ✅ fertig · ⏸ pausiert · ❌ verwor
 
 ## Aufgaben der aktuellen Phase
 
-### Phase 0 – Gerüst und Deployment
+### Phase 1 – Datenmodell und Speicher
+- [x] `schema.ts`: Datentypen, Version, strenge Validierung
+- [x] `migrations.ts`: Grundgerüst, Test-Migration
+- [x] `store.ts`: Laden/Speichern unter `rauchfrei:v1:state`
+- [x] Kaputte Daten: Fehlermeldung statt Absturz, mit Hinweis auf die Sicherung
+- [x] `navigator.storage.persist()` anfragen
+- [x] Testabdeckung `src/core/` und `src/storage/` mindestens 90 %, im Testlauf erzwungen
+- [x] Phasen-Check
+
+### Phase 0 – Gerüst und Deployment (abgeschlossen)
 - [x] Repo-Name mit der Nutzerin abstimmen (bestimmt die GitHub-Pages-Adresse) – bleibt `annasRauchApp`, siehe E11
 - [x] Vite + TypeScript, ESLint, Prettier, Vitest
 - [x] npm-Skripte: `lint`, `typecheck`, `test`, `build`
@@ -60,6 +69,11 @@ Legende: ⬜ offen · 🔄 in Arbeit · ✅ fertig · ⏸ pausiert · ❌ verwor
 | E13 | 10.10.2026 | TypeScript 6.0.x statt 7.x | `typescript-eslint` 8.71 verlangt `typescript <6.1.0` (Quelle: peerDependencies auf npm, geprüft am 10.10.2026) |
 | E14 | 10.10.2026 | Zusätzliche Entwicklungs-Abhängigkeiten: `@eslint/js` und `typescript-eslint` | Regelsätze, damit ESLint TypeScript prüfen kann. Nur für die Entwicklung, 0 KB im ausgelieferten Bundle |
 | E15 | 10.10.2026 | Platzhalter-Icons (grüne Fläche, heller Ring) selbst per Skript erzeugt, 192/512/maskable 512/apple-touch 180 | Keine fremden Bilder (E9). Werden in Phase 7 durch das endgültige Icon ersetzt |
+| E16 | 10.10.2026 | Neue Entwicklungs-Abhängigkeit `@vitest/coverage-v8`. `npm test` läuft immer mit Abdeckungsmessung und bricht unter 90 % für `src/core/` und `src/storage/` ab | Die 90-%-Regel aus `CLAUDE.md` wird so lokal und im Deployment erzwungen. Nur für die Entwicklung, 0 KB im Bundle |
+| E17 | 10.10.2026 | `createdAt` wird als lokales Datum `YYYY-MM-DD` gespeichert | Der Plan sagt nur „ISO-Datum“. So gilt die Regel „nie mit Uhrzeiten“ für alle Datumsfelder |
+| E18 | 10.10.2026 | Die Validierung lehnt unbekannte Felder ab und gibt nur einen neu aufgebauten Zustand zurück | „Ungültige Daten werden abgelehnt, nie teilweise übernommen“ (`CLAUDE.md`). Neue Felder kommen nur über eine neue Schema-Version |
+| E19 | 10.10.2026 | `isIsoDate` liegt schon jetzt in `src/core/dates.ts`, obwohl die Datei zu Phase 2 gehört | Die Validierung braucht die Datumsprüfung. So gibt es sie nur einmal |
+| E20 | 10.10.2026 | Speicherfunktionen bekommen den Speicher als Parameter (Standard: `localStorage`) | Tests laufen mit einem nachgebauten Speicher, ohne Browser-Umgebung und ohne zusätzliche Abhängigkeit |
 
 ---
 
@@ -67,6 +81,8 @@ Legende: ⬜ offen · 🔄 in Arbeit · ✅ fertig · ⏸ pausiert · ❌ verwor
 - [x] Phase 0: Name des Repos bzw. der App – Nutzerin am 10.10.2026: ist egal, also bleibt `annasRauchApp` / „Rauchfrei“ (E11)
 - [ ] Phase 7: Endgültiges App-Icon (E15)
 - [ ] Phase 7: iOS-Systemhinweis „Flugmodus ausschalten“ beim Offline-Start – vermeidbar? (siehe Phasen-Check 0)
+- [ ] Phase 3: Fehlermeldung bei kaputten Daten im Browser prüfen (Smoke-Test)
+- [ ] Phase 6: Die Meldung bei kaputten Daten verweist auf den Sicherungscode. Den Weg zur Wiederherstellung dort anbinden
 - [ ] Phase 5: Möchte die Nutzerin eigene Sprüche ergänzen?
 - [ ] Phase 7: Hotline-Nummer und Zeiten vor Veröffentlichung auf rauchfrei-info.de gegenprüfen
 - [ ] Nach Phase 8: Umzug zu Netlify (Phase 9) und Sync (Phase 10) gewünscht?
@@ -103,6 +119,19 @@ Ergebnis: bestanden
 
 Beobachtung beim iPhone-Test: Im Flugmodus zeigt iOS den Systemhinweis „Flugmodus ausschalten …“. Auslöser ist die Update-Prüfung des Service Workers beim Start (Anfrage an die eigene Adresse). Die App läuft trotzdem aus dem Cache. In Phase 7 prüfen, ob sich der Hinweis vermeiden lässt.
 
+### Phase 1 – Datenmodell und Speicher – 10.10.2026
+1. „Fertig, wenn“ erfüllt:                 Ja – Speichern, Laden, Validieren und eine Test-Migration (zwei Schritte, v1 → v3) sind per Unit-Test abgedeckt.
+2. Qualitätsprüfungen grün:                 Ja – lint, typecheck, test (84 Tests), build. Abdeckung `src/core/` + `src/storage/`: 99 % Anweisungen, 98 % Zweige.
+3. core/ frei von DOM, Speicher, Date.now:  Ja – Architekturtest grün. Er prüft jetzt zusätzlich, dass nur `src/storage/` auf den Browserspeicher zugreift.
+4. Keine externen Laufzeit-Anfragen:        Ja – Build nach fremden Adressen durchsucht, weiterhin nur der Hinweistext in Workbox.
+5. Ton-Regeln eingehalten:                  Ja – zwei neue Meldungen (Daten nicht lesbar, Speichern blockiert): Du-Form, kein Vorwurf.
+6. Schema-Änderung mit Migration und Test:  entfällt – Version 1 ist das erste Schema.
+7. Abweichungen dokumentiert:               Ja – E16 bis E20.
+8. Toter Code entfernt:                     Ja – keiner vorhanden.
+Ergebnis: bestanden
+
+Einschränkung: Die Fehlermeldung bei kaputten Daten ist nur über die Speicherlogik getestet, nicht im Browser angesehen. Das kommt in Phase 3 in den Smoke-Test.
+
 ---
 
 ## Sitzungsprotokoll
@@ -125,3 +154,12 @@ Beobachtung beim iPhone-Test: Im Flugmodus zeigt iOS den Systemhinweis „Flugmo
 - Commit `58aecc2` auf `main` gepusht. Erster Lauf scheiterte an `configure-pages`, weil Pages im Repo noch nicht aktiviert war. Nutzerin hat die Quelle auf „GitHub Actions“ gestellt, der Lauf ist danach grün.
 - Geprüft per Abruf: Seite, Service Worker, Manifest und alle vier Icons antworten unter https://annikalenneper.github.io/annasRauchApp/ mit 200, alle Pfade im HTML tragen das Präfix `/annasRauchApp/`.
 - Noch offen: Test auf dem iPhone (Home-Bildschirm, Offline-Start), danach Phasen-Check.
+
+### 10.10.2026 – Phase 0 abgeschlossen, Phase 1
+- iPhone-Test durch die Nutzerin bestanden (Home-Bildschirm, Start im Flugmodus). Phasen-Check 0 eingetragen.
+- `schema.ts`: Typen laut Plan, strenge Validierung mit Angabe des fehlerhaften Felds.
+- `migrations.ts`: schrittweises Hochziehen alter Stände. Die Liste ist noch leer, weil es nur Version 1 gibt.
+- `store.ts`: Laden und Speichern unter `rauchfrei:v1:state`. Laden wirft nie und verändert nichts. Ungültige Zustände werden nicht gespeichert.
+- `main.ts` lädt beim Start den Zustand, zeigt bei kaputten Daten oder blockiertem Speicher eine Meldung und fragt `navigator.storage.persist()` an.
+- `npm test` misst jetzt immer die Abdeckung und bricht unter 90 % ab.
+- Nächster Schritt: Phase 2 (Kernlogik).

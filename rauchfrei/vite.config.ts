@@ -33,5 +33,12 @@ export default defineConfig({
   ],
   test: {
     include: ['tests/unit/**/*.test.ts'],
+    coverage: {
+      enabled: true,
+      provider: 'v8',
+      include: ['src/core/**/*.ts', 'src/storage/**/*.ts'],
+      reporter: ['text'],
+      thresholds: { statements: 90, branches: 90, functions: 90, lines: 90 },
+    },
   },
 });
