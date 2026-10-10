@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Rauchfrei – Sichern und Hilfe</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#C2462A}a:hover{color:#9E3620}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F6EF; color: #1E2A24; font-family: 'Atkinson Hyperlegible', system-ui, sans-serif; display: flex; flex-direction: column; padding: 20px 24px 24px; gap: 18px; overflow: hidden">
+
+<div style="height: 44px; display: flex; align-items: center; gap: 4px">
+<a href="Main.dc.html" aria-label="Zurück zur Startseite" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: flex-start; color: #1E2A24">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+</a>
+<h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 26px; letter-spacing: -0.02em">Sichern &amp; umziehen</h1>
+</div>
+
+<div style="background: #FFFFFF; border-radius: 24px; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 14px">
+<div role="img" aria-label="Platzhalter für den QR-Code deiner Sicherung" style="width: 180px; height: 180px; border-radius: 16px; border: 2px dashed #BFCBB8; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 14px; color: #4A6956; padding: 16px; box-sizing: border-box">[QR-Code deiner Sicherung]</div>
+<div style="font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 15px; letter-spacing: 0.04em; background: #F4F6EF; border-radius: 10px; padding: 10px 14px">[SICHERUNGSCODE]</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; width: 100%">
+<button style="height: 48px; border-radius: 24px; border: none; background: #1E2A24; color: #FFFFFF; font-family: inherit; font-weight: 700; font-size: 15px">Code kopieren</button>
+<button style="height: 48px; border-radius: 24px; border: 1.5px solid #1E2A24; background: transparent; color: #1E2A24; font-family: inherit; font-weight: 700; font-size: 15px">Wiederherstellen</button>
+</div>
+</div>
+
+<div style="background: #E6ECE1; border-radius: 20px; padding: 16px 18px; font-size: 15px; line-height: 1.45">
+<strong>Neues Handy?</strong> Leg dort zuerst die App auf den Home-Bildschirm, öffne sie und tippe auf „Wiederherstellen“. Dann diesen QR-Code scannen.
+</div>
+
+<div style="flex-grow: 1"></div>
+
+<div style="background: #FFFFFF; border-radius: 24px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
+<div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px">Hilfe holen ist stark</div>
+<div style="font-size: 15px; line-height: 1.45; color: #4A6956">Kostenlose Beratung beim Rauchfrei-Telefon des BIÖG.<br>Mo–Do 10–22 Uhr, Fr–So 10–18 Uhr</div>
+<a href="tel:08008313131" style="height: 52px; border-radius: 26px; background: #C2462A; color: #FFFFFF; text-decoration: none; font-weight: 700; font-size: 17px; display: flex; align-items: center; justify-content: center; gap: 10px">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg>
+0800 8 31 31 31</a>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

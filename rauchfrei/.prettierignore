@@ -3,3 +3,6 @@ dev-dist
 coverage
 package-lock.json
 *.md
+design
+test-results
+playwright-report

@@ -12,7 +12,8 @@ npm install
 npm run dev        # lokaler Entwicklungsserver
 npm run lint
 npm run typecheck
-npm test
+npm test           # Unit-Tests
+npm run test:e2e   # Smoke-Test im Browser (einmalig vorher: npx playwright install chromium)
 npm run build      # Ergebnis in dist/
 npm run preview    # gebaute Version lokal ansehen
 ```

@@ -1,0 +1,57 @@
+{
+  "early": {
+    "headline": "Danke, dass du ehrlich bist, Anna.",
+    "accent": "Just begin again.",
+    "text": "Du hast angefangen, und das zählt. Nicht ab Montag, nicht ab morgen, einfach ab jetzt."
+  },
+  "responses": [
+    {
+      "headline": "Eine Zigarette löscht nicht {tage} rauchfreie Tage aus.",
+      "accent": "Just begin again.",
+      "text": "Nicht ab Montag, nicht ab morgen, einfach ab jetzt."
+    },
+    {
+      "headline": "Danke, dass du ehrlich bist, Anna.",
+      "accent": "Die {tage} Tage gehören dir.",
+      "text": "Die nimmt dir keine Zigarette wieder weg. Und von heute ist auch noch ein Stück übrig."
+    },
+    {
+      "headline": "Ausrutscher passieren auf fast jedem Weg raus aus dem Rauchen.",
+      "accent": "Du bist unterwegs.",
+      "text": "Das hier ist eine Kurve, kein Ende. Du hast {tage} Tage lang gezeigt, wie es geht."
+    },
+    {
+      "headline": "Du hast {tage} Tage bewiesen, dass du es kannst.",
+      "accent": "Das war kein Zufall.",
+      "text": "Und es ist nicht vorbei. Der nächste rauchfreie Moment fängt genau jetzt an."
+    },
+    {
+      "headline": "Sei heute freundlich zu dir, Maus.",
+      "accent": "Du bist immer noch der Boss.",
+      "text": "Mit dir selbst zu schimpfen macht den nächsten Schritt nur schwerer. Deine {tage} rauchfreien Tage stehen weiter auf deinem Konto."
+    },
+    {
+      "headline": "Was war heute anders als sonst?",
+      "accent": "Wissen ist dein Vorsprung.",
+      "text": "Wenn du es weißt, bist du beim nächsten Mal vorbereitet. Deine {tage} Tage bleiben, wo sie sind."
+    }
+  ],
+  "triggerLabels": {
+    "stress": "Stress",
+    "alkohol": "Alkohol",
+    "gesellschaft": "Gesellschaft",
+    "langeweile": "Langeweile",
+    "gewohnheit": "Gewohnheit",
+    "sonstiges": "Sonstiges"
+  },
+  "triggerHints": {
+    "stress": "Stress war schon öfter dabei. Vielleicht hilft ein kleiner Notfallplan: drei tiefe Atemzüge, kurz raus, ein Glas Wasser.",
+    "alkohol": "Alkohol war schon öfter dabei. Vielleicht hilft ein Plan für den nächsten Abend.",
+    "gesellschaft": "In Gesellschaft war es schon öfter schwer. Vielleicht weihst du vorher jemanden ein, der dir den Rücken freihält.",
+    "langeweile": "Langeweile war schon öfter dabei. Vielleicht legst du dir etwas für die Hände bereit.",
+    "gewohnheit": "Die Gewohnheit war schon öfter dabei. Vielleicht tauschst du genau diesen Moment gegen ein neues kleines Ritual.",
+    "sonstiges": "Das kam jetzt schon öfter vor. Vielleicht magst du kurz aufschreiben, was diese Momente gemeinsam haben."
+  },
+  "counselingHint": "Gerade ist es öfter schwer, und das darf so sein. Wenn du magst: Beim Rauchfrei-Telefon hören dir Leute zu, die sich damit auskennen. Kostenlos und ohne Verpflichtung.",
+  "counselingLink": "Zur Nummer"
+}

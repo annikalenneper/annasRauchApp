@@ -1,0 +1,44 @@
+{
+  "source": {
+    "label": "Quelle: WHO, „Health benefits of smoking cessation“",
+    "url": "https://www.who.int/news-room/questions-and-answers/item/tobacco-health-benefits-of-smoking-cessation"
+  },
+  "facts": [
+    { "day": 0, "after": "Nach 20 Minuten", "text": "Herzfrequenz und Blutdruck sinken." },
+    {
+      "day": 1,
+      "after": "Nach 12 Stunden",
+      "text": "Der Kohlenmonoxid-Wert im Blut ist wieder normal."
+    },
+    {
+      "day": 14,
+      "after": "Nach 2 bis 12 Wochen",
+      "text": "Durchblutung und Lungenfunktion verbessern sich."
+    },
+    {
+      "day": 30,
+      "after": "Nach 1 bis 9 Monaten",
+      "text": "Husten und Kurzatmigkeit lassen nach."
+    },
+    {
+      "day": 365,
+      "after": "Nach 1 Jahr",
+      "text": "Das Risiko für koronare Herzkrankheit ist etwa halb so hoch wie bei Rauchenden."
+    },
+    {
+      "day": 1825,
+      "after": "Nach 5 Jahren",
+      "text": "Das Schlaganfallrisiko sinkt auf das von Nichtrauchenden (je nach Person nach 5 bis 15 Jahren)."
+    },
+    {
+      "day": 3650,
+      "after": "Nach 10 Jahren",
+      "text": "Das Lungenkrebsrisiko ist etwa halb so hoch wie bei Rauchenden, auch das Risiko für mehrere andere Krebsarten sinkt."
+    },
+    {
+      "day": 5475,
+      "after": "Nach 15 Jahren",
+      "text": "Das Risiko für koronare Herzkrankheit entspricht dem von Nichtrauchenden."
+    }
+  ]
+}

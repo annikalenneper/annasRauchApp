@@ -1,22 +1,32 @@
-const MESSAGES = {
-  corrupt: {
-    title: 'Deine gespeicherten Daten lassen sich gerade nicht lesen',
-    text: 'Es wurde nichts gelöscht. Wenn du einen Sicherungscode hast, kannst du deinen Stand damit wiederherstellen.',
-  },
-  unavailable: {
-    title: 'Dein Browser lässt diese Seite gerade nichts speichern',
-    text: 'Im privaten Modus passiert das manchmal. Öffne die App am besten in einem normalen Fenster oder vom Home-Bildschirm.',
-  },
-};
+import ui from '../content/ui.json';
+import { href } from './context';
+import { el } from './dom';
 
-export function renderStorageError(root: HTMLElement, kind: keyof typeof MESSAGES): void {
-  const title = document.createElement('h1');
-  title.textContent = MESSAGES[kind].title;
-  const text = document.createElement('p');
-  text.textContent = MESSAGES[kind].text;
-
-  const box = document.createElement('section');
-  box.setAttribute('role', 'alert');
-  box.append(title, text);
-  root.replaceChildren(box);
+/** Shown instead of the app when the saved data cannot be read or the browser blocks storage. */
+export function renderStorageError(kind: 'corrupt' | 'unavailable'): HTMLElement {
+  const corrupt = kind === 'corrupt';
+  return el(
+    'main',
+    { class: 'screen screen--roomy' },
+    el(
+      'section',
+      { class: 'stack-m intro', role: 'alert' },
+      el(
+        'h1',
+        { class: 'h1' },
+        corrupt ? ui.storageError.corruptTitle : ui.storageError.unavailableTitle,
+      ),
+      el(
+        'p',
+        { class: 'lead' },
+        corrupt ? ui.storageError.corruptText : ui.storageError.unavailableText,
+      ),
+    ),
+    corrupt &&
+      el(
+        'a',
+        { class: 'button button--primary', href: href('wiederherstellen') },
+        ui.storageError.corruptAction,
+      ),
+  );
 }

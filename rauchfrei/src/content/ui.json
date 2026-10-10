@@ -1,0 +1,163 @@
+{
+  "common": {
+    "wordmark": "rauchfrei",
+    "day": "Tag",
+    "days": "Tage",
+    "back": "Zurück zur Startseite",
+    "backToBackup": "Zurück zur Sicherung",
+    "backToStart": "Zurück zum Anfang"
+  },
+  "nav": {
+    "label": "Hauptnavigation",
+    "start": "Start",
+    "treasure": "Schatzkästchen",
+    "backup": "Sichern & Hilfe"
+  },
+  "form": {
+    "startLabel": "Seit wann rauchst du nicht mehr?",
+    "smokingTitle": "Was hast du vorher ausgegeben?",
+    "smokingNote": "Optional – dann siehst du, was du sparst.",
+    "perDay": "Zigaretten pro Tag",
+    "price": "Preis pro Schachtel (€)",
+    "perPack": "Stück pro Schachtel",
+    "errorStartInvalid": "Bitte wähle ein Datum aus.",
+    "errorStartFuture": "Das Datum liegt in der Zukunft. Nimm heute oder einen früheren Tag.",
+    "errorSmokingIncomplete": "Für die Ersparnis brauche ich Zigaretten pro Tag und den Preis. Oder lass beide Felder leer.",
+    "errorSmokingNumbers": "Bitte gib hier Zahlen größer als 0 ein, zum Beispiel 15 und 8,90.",
+    "errorSave": "Das Speichern hat gerade nicht geklappt. Versuch es bitte noch einmal."
+  },
+  "onboarding": {
+    "title": "Anna, du machst das toll!",
+    "intro": "Hier ist deine neue App: Kein Konto, kein Abo. Alle Daten bleiben auf deinem Handy.",
+    "submit": "Los geht’s",
+    "homescreenNote": "Leg die App auf deinen Home-Bildschirm, damit dein Zähler sicher gespeichert bleibt.",
+    "restoreLink": "Ich habe schon einen Sicherungscode"
+  },
+  "home": {
+    "settings": "Einstellungen",
+    "since": "Rauchfrei seit {datum}",
+    "sinceToday": "Heute geht’s los, Anna",
+    "ofDays": "{rauchfrei} von {gesamt} Tagen rauchfrei",
+    "nextMilestone": "Nächster Meilenstein",
+    "remainingOne": "noch 1 Tag bis {ziel}",
+    "remaining": "noch {rest} Tage bis {ziel}",
+    "saved": "gespart",
+    "notSmoked": "Zigaretten nicht geraucht",
+    "setupSavings": "Ersparnis einrichten",
+    "todayForYou": "Heute für dich",
+    "longest": "Dein längster Versuch: {tage} Tage",
+    "reportSlip": "Ausrutscher melden"
+  },
+  "homescreenHint": {
+    "title": "Leg mich auf deinen Home-Bildschirm",
+    "why": "Dann bleibt dein Zähler sicher gespeichert und die App startet auch ohne Netz.",
+    "ios": "iPhone: unten auf „Teilen“ tippen, dann „Zum Home-Bildschirm“.",
+    "android": "Android: oben im Menü „App installieren“ oder „Zum Startbildschirm hinzufügen“.",
+    "dismiss": "Hinweis schließen"
+  },
+  "slip": {
+    "title": "Was ist passiert?",
+    "intro": "Thx for being honest, Maus. Hier gibt es keinen Ärger! Entscheide einfach, wie du weitermachen willst.",
+    "slipTitle": "Ich hatte einen Ausrutscher",
+    "slipText": "Dein Zähler läuft weiter. Der Tag wird nur vermerkt.",
+    "restartTitle": "Ich fange neu an",
+    "restartText": "Neuer Startpunkt. Deine bisherigen {tage} Tage bleiben in deiner Historie erhalten.",
+    "restartConfirmTitle": "Neuer Startpunkt ab heute?",
+    "restartConfirmText": "Dein Zähler beginnt neu. Deine bisherigen {tage} Tage bleiben in deiner Historie.",
+    "restartConfirm": "Ja, neu anfangen",
+    "restartCancel": "Doch nicht",
+    "note": "Du entscheidest. Beides ist in Ordnung, und beides heißt: Du machst weiter."
+  },
+  "response": {
+    "triggerTitle": "Magst du festhalten, was der Auslöser war?",
+    "triggerNote": "Freiwillig. Hilft dir, beim nächsten Mal vorbereitet zu sein.",
+    "noteLabel": "Magst du noch etwas dazu notieren?",
+    "continue": "Weiter geht’s",
+    "skip": "Überspringen"
+  },
+  "reward": {
+    "milestone": "Meilenstein",
+    "daysSmokeFree": "Tage rauchfrei",
+    "daySmokeFree": "Tag rauchfrei",
+    "surprise": "Überraschung",
+    "surpriseTitle": "Kleiner Gruß zwischendurch",
+    "health": "Dein Körper",
+    "savedSoFar": "Bisher gespart: {euro}. Gönn dir was davon.",
+    "continue": "Weiter",
+    "kept": "Liegt jetzt in deinem Schatzkästchen."
+  },
+  "treasure": {
+    "title": "Schatzkästchen",
+    "intro": "Alles, was du dir schon verdient hast.",
+    "empty": "Noch ist es hier leer. Morgen liegt schon das Erste drin.",
+    "milestoneLabel": "Meilenstein · {tage} Tage",
+    "milestoneLabelOne": "Meilenstein · 1 Tag",
+    "surpriseLabel": "Überraschung · Tag {tage}",
+    "healthLabel": "Dein Körper · {wann}",
+    "earlierAttempt": "aus einem früheren Versuch"
+  },
+  "backup": {
+    "title": "Sichern & umziehen",
+    "qrAlt": "QR-Code deiner Sicherung",
+    "qrTooBig": "Deine Sicherung ist zu groß für einen QR-Code. Der Code darunter funktioniert trotzdem.",
+    "codeLabel": "Dein Sicherungscode",
+    "copy": "Code kopieren",
+    "copied": "Kopiert",
+    "copyFailed": "Bitte markiere den Code und kopiere ihn von Hand.",
+    "restore": "Wiederherstellen",
+    "newPhoneTitle": "Neues Handy?",
+    "newPhoneText": "Leg dort zuerst die App auf den Home-Bildschirm, öffne sie und tippe auf „Wiederherstellen“. Dann diesen QR-Code scannen.",
+    "privacyTitle": "Deine Daten gehören dir",
+    "privacyText": "Alles bleibt auf deinem Handy. Kein Konto, keine Cookies, kein Tracking. Die Sicherung ist der einzige Weg, wie deine Daten das Gerät verlassen, und den gehst nur du."
+  },
+  "help": {
+    "title": "Hilfe holen ist stark",
+    "text": "Kostenlose Beratung beim Rauchfrei-Telefon des BIÖG.",
+    "hours": "Mo–Do 10–22 Uhr, Fr–So 10–18 Uhr",
+    "phoneLabel": "0800 8 31 31 31",
+    "phoneHref": "tel:08008313131",
+    "onlineLabel": "Online-Programm auf rauchfrei-info.de",
+    "onlineHref": "https://www.rauchfrei-info.de",
+    "disclaimer": "Diese App ersetzt keine ärztliche oder therapeutische Beratung.",
+    "source": "Nummer und Zeiten: rauchfrei-info.de (BIÖG), geprüft am 10.10.2026"
+  },
+  "restore": {
+    "title": "Wiederherstellen",
+    "intro": "Füge deinen Sicherungscode ein oder scanne den QR-Code von deinem alten Handy.",
+    "codeLabel": "Sicherungscode",
+    "scan": "QR-Code scannen",
+    "scanStop": "Kamera schließen",
+    "scanHint": "Halte den QR-Code ruhig ins Bild.",
+    "scanFailed": "Die Kamera lässt sich gerade nicht öffnen. Du kannst den Code auch einfügen.",
+    "check": "Code prüfen",
+    "previewTitle": "Das steckt in der Sicherung",
+    "previewStart": "Rauchfrei seit {datum}",
+    "previewDays": "{tage} Tage rauchfrei",
+    "previewDaysOne": "1 Tag rauchfrei",
+    "previewAttempts": "{anzahl} Versuche in der Historie",
+    "overwriteNote": "Wenn du das übernimmst, ersetzt es den Stand auf diesem Handy.",
+    "confirm": "Diesen Stand übernehmen",
+    "errors": {
+      "empty": "Hier fehlt noch der Code.",
+      "format": "Das sieht nicht nach einem Sicherungscode aus. Er beginnt mit „RF“.",
+      "damaged": "Der Code ist unvollständig oder beschädigt. Kopier ihn bitte noch einmal ganz.",
+      "too-new": "Diese Sicherung stammt aus einer neueren Version der App. Lade die App einmal neu und versuch es wieder.",
+      "invalid": "Mit diesem Code stimmt etwas nicht. Erstell auf dem alten Handy bitte eine neue Sicherung."
+    }
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "startTitle": "Startdatum korrigieren",
+    "save": "Speichern",
+    "historyTitle": "Deine Versuche",
+    "historyCurrent": "seit {von} · {tage} Tage · läuft",
+    "historyPast": "{von} bis {bis} · {tage} Tage"
+  },
+  "storageError": {
+    "corruptTitle": "Deine gespeicherten Daten lassen sich gerade nicht lesen",
+    "corruptText": "Es wurde nichts gelöscht. Wenn du einen Sicherungscode hast, kannst du deinen Stand damit wiederherstellen.",
+    "corruptAction": "Mit Sicherungscode wiederherstellen",
+    "unavailableTitle": "Dein Browser lässt diese Seite gerade nichts speichern",
+    "unavailableText": "Im privaten Modus passiert das manchmal. Öffne die App am besten in einem normalen Fenster oder vom Home-Bildschirm."
+  }
+}

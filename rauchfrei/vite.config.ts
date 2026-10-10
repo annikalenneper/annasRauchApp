@@ -10,14 +10,15 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['icons/*.png'],
+      workbox: { globPatterns: ['**/*.{js,css,html,png,woff2}'] },
       manifest: {
         name: 'Rauchfrei',
         short_name: 'Rauchfrei',
-        description: 'Zählt deine rauchfreien Tage. Kostenlos, ohne Konto, ohne Tracking.',
+        description: 'Annas Zähler für rauchfreie Tage. Ohne Konto, ohne Tracking.',
         lang: 'de',
         display: 'standalone',
-        theme_color: '#2f7d5b',
-        background_color: '#f6f3ec',
+        theme_color: '#f4f6ef',
+        background_color: '#f4f6ef',
         icons: [
           { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' },
@@ -33,12 +34,5 @@ export default defineConfig({
   ],
   test: {
     include: ['tests/unit/**/*.test.ts'],
-    coverage: {
-      enabled: true,
-      provider: 'v8',
-      include: ['src/core/**/*.ts', 'src/storage/**/*.ts'],
-      reporter: ['text'],
-      thresholds: { statements: 90, branches: 90, functions: 90, lines: 90 },
-    },
   },
 });

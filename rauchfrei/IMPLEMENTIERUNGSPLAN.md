@@ -10,7 +10,7 @@ Stand: 10.10.2026
 
 ## 1. Zielbild
 
-**Für wen:** Menschen, die mit dem Rauchen aufgehört haben oder aufhören wollen. Keine technischen Vorkenntnisse nötig.
+**Für wen:** Nur für Anna, eine Freundin der Nutzerin. Die App darf sie persönlich ansprechen.
 
 **Was die App kann (Version 1):**
 - Beim ersten Öffnen: Startdatum abfragen, optional Zigaretten pro Tag und Preis pro Schachtel
@@ -29,7 +29,7 @@ Stand: 10.10.2026
 
 - **Web-App (PWA)**, die man über „Zum Home-Bildschirm“ wie eine normale App ablegt. Funktioniert offline.
 - **Hosting:** zunächst GitHub Pages, Deployment über GitHub Actions bei jedem Push auf `main`.
-- **Alle Nutzerdaten bleiben auf dem Gerät** (localStorage). Es gibt keinen Server. Mehrere Nutzer sind kein Problem, weil jeder nur seine eigenen Daten auf seinem eigenen Handy hat.
+- **Alle Nutzerdaten bleiben auf dem Gerät** (localStorage). Es gibt keinen Server.
 - **Inhalte** (Sprüche, Meilensteine, Gesundheitsfakten, Ausrutscher-Rückmeldungen) liegen als JSON im Repo und werden mit ausgeliefert. Neue Sprüche: Datei ändern, pushen, fertig.
 
 ### Technik
@@ -163,7 +163,7 @@ Hintergrund: In der Rückfallforschung beschreibt der **Abstinenzverletzungseffe
 
 ## 4. Inhalte (Grundstock)
 
-Die Texte unten werden in Phase 5 in die JSON-Dateien übernommen. Ton: warm, locker, ein bisschen Humor, nie belehrend. Du-Form.
+Die Texte unten sind ein Grundstock und werden in Etappe 2 in die JSON-Dateien übernommen. Ton laut `CLAUDE.md`: persönlich an Anna, warm, mit einer Prise Boss-Bitch-Humor, nicht übertrieben. Claude darf die Texte in diesem Ton nachschärfen und ergänzen.
 
 ### Meilensteine (`milestones.json`)
 - **Tag 1:** Der erste Tag ist geschafft. Der schwerste Teil von allem ist, anzufangen, und das hast du hinter dir.
@@ -241,80 +241,33 @@ Die App zeigt die Quelle unter jedem Fakt an. Keine weiteren Gesundheitsaussagen
 
 ---
 
-## 5. Entwicklungsphasen
+## 5. Etappen
 
-Jede Phase endet mit lauffähigem Stand, grünen Tests und einem Eintrag in `PROGRESS.md`.
+Drei Etappen. Claude arbeitet Etappe 1 und 2 **selbstständig durch** und meldet sich erst am Ende von Etappe 2 mit einem Link zum Testen. Rückfragen nur, wenn etwas nicht rückgängig zu machen ist oder Konten bzw. Zugänge der Nutzerin gebraucht werden (z. B. GitHub-Repo anlegen, Pages aktivieren).
 
-### Phase 0 – Gerüst und Deployment
-- Vite + TypeScript, ESLint, Prettier, Vitest einrichten
-- `vite-plugin-pwa` mit Manifest (Name, Icons, `display: standalone`, Theme-Farbe)
-- GitHub Actions: Build und Deploy auf GitHub Pages bei Push auf `main`
-- `base`-Pfad in `vite.config.ts` auf den Repo-Namen setzen
-- **Fertig, wenn:** eine leere Seite unter der GitHub-Pages-Adresse erreichbar ist, sich auf dem iPhone zum Home-Bildschirm hinzufügen lässt und offline startet.
+### Etappe 1 – Fundament
+- Vite + TypeScript, ESLint, Prettier, Vitest, `vite-plugin-pwa` (Manifest, Service Worker, offline)
+- GitHub Actions: Build und Deploy auf GitHub Pages bei Push auf `main`. Repo-Name: `rauchfrei`
+- Datenmodell, Speicher mit Präfix, Migrations-Gerüst, `navigator.storage.persist()`
+- Kernlogik (Tage, Ersparnis, Ausrutscher, Belohnungen) als reine Funktionen mit Unit-Tests für die Grenzfälle: Monatswechsel, Schaltjahr, Sommerzeit, Start heute, Start in der Zukunft (nicht erlaubt), mehrere Ausrutscher am selben Tag, Neustart, Ersparnis ohne Angaben
+- **Fertig, wenn:** alle Tests grün sind und eine leere App unter der GitHub-Pages-Adresse erreichbar ist.
 
-### Phase 1 – Datenmodell und Speicher
-- `schema.ts`, `store.ts` mit Präfix `rauchfrei:v1:`, `migrations.ts` mit Grundgerüst für spätere Versionen
-- Validierung beim Laden. Kaputte Daten führen nicht zum Absturz, sondern zu einer Fehlermeldung mit Hinweis auf die Sicherung.
-- `navigator.storage.persist()` anfragen
-- **Fertig, wenn:** Speichern, Laden, Validieren und eine Test-Migration per Unit-Test abgedeckt sind.
+### Etappe 2 – Die App
+- Alle sechs Screens nach `design/`: Erster Start, Startseite, Ausrutscher und Neustart, Rückmeldung mit Auslöser, Belohnungen mit Schatzkästchen, Sicherung und Wiederherstellung mit Hilfe-Bereich
+- Inhalte aus Abschnitt 4 in die JSON-Dateien übernehmen und im Ton aus `CLAUDE.md` nachschärfen und ergänzen
+- Hotline-Nummer und Zeiten selbst auf rauchfrei-info.de gegenprüfen
+- Home-Bildschirm-Hinweis, Dark Mode, `prefers-reduced-motion`, große Systemschrift
+- **Fertig, wenn:** alles aus Abschnitt 3 funktioniert und die App online ist. Dann der Nutzerin Bescheid geben: Link plus kurze Testanleitung (auf den Home-Bildschirm legen, Startdatum vordatieren, um Belohnungen zu sehen, Sicherung einmal ausprobieren).
 
-### Phase 2 – Kernlogik
-- `dates.ts`, `savings.ts`, `slips.ts`, `rewards.ts` als reine Funktionen
-- Tests für: Monatswechsel, Schaltjahr, Sommerzeitwechsel, Start heute, Start in der Zukunft (nicht erlaubt), mehrere Ausrutscher am selben Tag, Neustart, Ersparnis ohne Angaben
-- **Fertig, wenn:** alle Regeln aus Abschnitt 3 als Tests vorliegen und grün sind.
+### Etappe 3 – Abnahme
+- Die Nutzerin und Anna testen, Rückmeldungen werden eingearbeitet.
+- **Fertig, wenn:** die Nutzerin sagt, dass es passt.
 
-### Phase 3 – Onboarding und Startseite
-- Erststart: Startdatum (Datumsfeld, Standard heute, nicht in der Zukunft), optional Ersparnis-Angaben
-- Startseite: große Tageszahl, Ersparnis, nicht gerauchte Zigaretten, Knopf „Ausrutscher melden“
-- Home-Bildschirm-Hinweis
-- Einstellungen: Ersparnis-Angaben ändern, Startdatum korrigieren
-- **Fertig, wenn:** man auf dem iPhone die App einrichten kann und die Zahlen stimmen.
-
-### Phase 4 – Ausrutscher und Neustart
-- Ablauf laut Abschnitt 3: Auswahl Ausrutscher oder Neustart, Rückmeldung, optional Auslöser
-- Historie der Versuche mit „längster Versuch“
-- Hinweise bei wiederholtem Auslöser und bei häufigen Ausrutschern
-- **Fertig, wenn:** beide Wege funktionieren, die Rückmeldungen erscheinen und die Zählung korrekt bleibt.
-
-### Phase 5 – Belohnungen und Inhalte
-- Texte aus Abschnitt 4 in die JSON-Dateien übernehmen
-- Anzeige fälliger Belohnungen beim Öffnen, Schatzkästchen
-- Gesundheitsfakten mit Quellenangabe
-- Kleine Animation beim Meilenstein (dezent, mit `prefers-reduced-motion` abschaltbar)
-- **Fertig, wenn:** sich mit einem vordatierten Startdatum alle Belohnungsarten auslösen lassen und keine doppelt kommt.
-
-### Phase 6 – Sicherung und Wiederherstellung
-- Export: Code und QR-Code anzeigen, Code kopieren
-- Import: Code einfügen oder QR-Code per Kamera scannen, Vorschau, Bestätigung
-- Hinweistext zum iPhone-Speicher (Wiederherstellung in der installierten App)
-- **Fertig, wenn:** Export auf Handy A und Import auf Handy B denselben Stand ergeben (manuell getestet und als E2E-Test im Browser).
-
-### Phase 7 – Feinschliff
-- Hilfe-Seite (Abschnitt 4) und Datenschutz-Seite: Daten bleiben auf dem Gerät, keine Cookies, kein Tracking
-- Dark Mode, große Schrift funktioniert, Bedienbarkeit mit VoiceOver
-- Lighthouse: PWA installierbar, Barrierefreiheit mindestens 95
-- **Fertig, wenn:** alle Prüfpunkte erfüllt sind.
-
-### Phase 8 – Testlauf
-- Freundin und ein bis zwei weitere Personen nutzen die App eine Woche
-- Rückmeldungen sammeln, Texte nachschärfen
-- **Fertig, wenn:** die Rückmeldungen eingearbeitet sind und die Nutzerin Version 1 abgenommen hat.
-
-### Phase 9 – Optional: Umzug zu Netlify
-- Nur auf ausdrückliche Entscheidung der Nutzerin
-- Neue Adresse = neuer Browserspeicher. Die alte Version zeigt einen Umzugshinweis mit Anleitung: Sicherungscode erzeugen → neue App installieren → dort wiederherstellen.
-- Die alte Adresse bleibt mindestens 3 Monate mit diesem Hinweis online.
-- Wenn möglich gleich eine eigene Domain nutzen, dann bleibt die Adresse bei künftigen Umzügen gleich.
-
-### Phase 10 – Optional: Sync über Netlify
-- Voraussetzung: Phase 9
-- Zufälliger Sync-Schlüssel pro Person, Daten im Browser verschlüsselt (Web Crypto, AES-GCM, Schlüssel aus dem Sync-Schlüssel abgeleitet)
-- Eine Netlify Function speichert und liefert verschlüsselte Daten über Netlify Blobs. Der Server sieht nie Klartext.
-- Vorher: Kosten und Kontingent von Blobs im Konto der Nutzerin prüfen und im Entscheidungslog festhalten
-- Missbrauchsschutz: Größenlimit pro Eintrag, Ratenbegrenzung pro IP
+### Später, nur auf ausdrücklichen Wunsch
+- **Umzug zu Netlify:** Neue Adresse bedeutet neuen Browserspeicher. Umzug per Sicherungscode, die alte Adresse zeigt eine Weile einen Umzugshinweis. Am besten gleich eine eigene Domain nutzen.
+- **Sync über Netlify:** Netlify Function + Netlify Blobs, Daten im Browser verschlüsselt (Web Crypto, AES-GCM), zufälliger Sync-Schlüssel. Vorher die Blobs-Kosten im Konto der Nutzerin prüfen.
 
 ---
-
 ## 6. Risiken
 
 | Risiko | Gegenmaßnahme |

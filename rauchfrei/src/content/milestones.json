@@ -1,0 +1,58 @@
+{
+  "milestones": [
+    {
+      "day": 1,
+      "text": "Tag eins, Anna. Der schwerste Teil von allem ist, anzufangen, und den hast du hinter dir."
+    },
+    { "day": 2, "text": "Zwei Tage. Dein Körper hat das Kohlenmonoxid längst rausgeworfen." },
+    {
+      "day": 3,
+      "text": "Drei Tage. Viele sagen, das ist der härteste Abschnitt. Du stehst mittendrin und hältst durch."
+    },
+    { "day": 5, "text": "Fünf Tage. Eine ganze Hand voll, und die Hand ist frei." },
+    {
+      "day": 7,
+      "text": "Eine Woche rauchfrei. Das ist kein Zufall mehr, das ist eine Entscheidung. Deine."
+    },
+    { "day": 10, "text": "Zweistellig. Ab heute brauchst du zwei Ziffern für deinen Erfolg." },
+    { "day": 14, "text": "Zwei Wochen. Deine Lunge fängt an, aufzuräumen." },
+    { "day": 21, "text": "Drei Wochen. Neue Gewohnheiten fühlen sich langsam normal an." },
+    {
+      "day": 30,
+      "text": "Ein Monat, Maus. Gönn dir was von dem Geld, das du nicht verbrannt hast."
+    },
+    { "day": 50, "text": "Fünfzig Tage. Du bist hier der Boss, nicht die Kippe." },
+    { "day": 75, "text": "Dreiviertel auf dem Weg zur 100, und du läufst einfach weiter." },
+    { "day": 100, "text": "HUNDERT TAGE. Dreistellig. Lass dich feiern, Anna." },
+    {
+      "day": 150,
+      "text": "Andere Apps wollen hier Geld von dir. Wir sagen nur: Respekt."
+    },
+    { "day": 200, "text": "Du bist längst eine, die nicht raucht." },
+    { "day": 250, "text": "Ein Vierteltausend. Klingt nach Chefin, ist auch so." },
+    { "day": 300, "text": "Das erste Jahr ist in Sichtweite, und du siehst gut dabei aus." },
+    {
+      "day": 365,
+      "text": "Ein ganzes Jahr, Anna. Was für ein Geschenk an dich selbst."
+    }
+  ],
+  "every100": [
+    "Du zählst inzwischen in Hundertern. Wer macht das schon.",
+    "Das ist längst kein Versuch mehr, das bist einfach du.",
+    "Die Kippe hat es versucht. Du hast gewonnen. Wieder."
+  ],
+  "anniversary": [
+    "{jahre} Jahre rauchfrei, Anna. Genau das hast du dir damals gewünscht.",
+    "{jahre} Jahre. Du bist hier der Boss, und zwar schon ziemlich lange."
+  ],
+  "comparisons": [
+    { "euros": 20, "text": "Das ist ein richtig schöner Blumenstrauß." },
+    { "euros": 50, "text": "Das ist ein gutes Abendessen zu zweit." },
+    { "euros": 100, "text": "Das sind neue Sneaker." },
+    { "euros": 250, "text": "Das ist ein Wochenende am Meer." },
+    { "euros": 500, "text": "Das ist ein Kurztrip mit allem Drum und Dran." },
+    { "euros": 1000, "text": "Das ist ein richtiger Urlaub." },
+    { "euros": 2000, "text": "Das ist ein Urlaub, bei dem du nicht aufs Geld schaust." },
+    { "euros": 5000, "text": "Das ist schon fast ein kleines Auto. Oder sehr viele Schuhe." }
+  ]
+}

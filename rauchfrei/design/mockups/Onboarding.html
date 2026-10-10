@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Rauchfrei – Erster Start</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#C2462A}a:hover{color:#9E3620}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F4F6EF; color: #1E2A24; font-family: 'Atkinson Hyperlegible', system-ui, sans-serif; display: flex; flex-direction: column; padding: 28px 24px 24px; gap: 24px; overflow: hidden">
+
+<div style="display: flex; flex-direction: column; gap: 10px; padding-top: 24px">
+<div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: -0.02em">rauchfrei</div>
+<h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 40px; line-height: 1.05; letter-spacing: -0.03em">Anna, du machst das toll!</h1>
+<p style="margin: 0; font-size: 17px; line-height: 1.45; color: #4A6956">Hier ist deine neue App: Kein Konto, kein Abo. Alle Daten bleiben auf deinem Handy.</p>
+</div>
+
+<div style="background: #FFFFFF; border-radius: 24px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
+<label for="start" style="font-weight: 700; font-size: 17px">Seit wann rauchst du nicht mehr?</label>
+<input id="start" type="date" value="2026-05-01" style="height: 52px; box-sizing: border-box; border: 1.5px solid #BFCBB8; border-radius: 14px; padding: 0 14px; font-family: inherit; font-size: 17px; color: #1E2A24; background: #FFFFFF">
+</div>
+
+<div style="background: #FFFFFF; border-radius: 24px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<div style="font-weight: 700; font-size: 17px">Was hast du vorher ausgegeben?</div>
+<div style="font-size: 14px; color: #4A6956">Optional – dann siehst du, was du sparst.</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="perday" style="font-size: 13px; color: #4A6956">Zigaretten pro Tag</label>
+<input id="perday" type="number" value="15" style="height: 48px; box-sizing: border-box; border: 1.5px solid #BFCBB8; border-radius: 12px; padding: 0 12px; font-family: inherit; font-size: 17px; color: #1E2A24; width: 100%">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="price" style="font-size: 13px; color: #4A6956">Preis pro Schachtel</label>
+<input id="price" type="text" value="8,90 €" style="height: 48px; box-sizing: border-box; border: 1.5px solid #BFCBB8; border-radius: 12px; padding: 0 12px; font-family: inherit; font-size: 17px; color: #1E2A24; width: 100%">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="perpack" style="font-size: 13px; color: #4A6956">Stück pro Schachtel</label>
+<input id="perpack" type="number" value="20" style="height: 48px; box-sizing: border-box; border: 1.5px solid #BFCBB8; border-radius: 12px; padding: 0 12px; font-family: inherit; font-size: 17px; color: #1E2A24; width: 100%">
+</div>
+</div>
+</div>
+
+<div style="flex-grow: 1"></div>
+
+<div style="display: flex; flex-direction: column; gap: 12px">
+<a href="Main.dc.html" style="height: 56px; border-radius: 28px; background: #C2462A; color: #FFFFFF; text-decoration: none; font-weight: 700; font-size: 18px; display: flex; align-items: center; justify-content: center">Los geht’s</a>
+<div style="font-size: 13px; line-height: 1.4; color: #4A6956; text-align: center">Leg die App auf deinen Home-Bildschirm,<br>damit dein Zähler sicher gespeichert bleibt.</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
