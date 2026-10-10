@@ -2,7 +2,7 @@
 
 **Aktuelle Phase:** 0 – Gerüst und Deployment
 **Letzte Aktualisierung:** 10.10.2026
-**Status:** Gerüst steht lokal und ist grün. Offen: Repo-Name bestätigen, erster Push/Deployment, iPhone-Test
+**Status:** Phase 0 abgeschlossen. App ist unter https://annikalenneper.github.io/annasRauchApp/ erreichbar
 
 ---
 
@@ -10,7 +10,7 @@
 
 | Phase | Inhalt | Status | Phasen-Check |
 |---|---|---|---|
-| 0 | Gerüst und Deployment | 🔄 in Arbeit | – |
+| 0 | Gerüst und Deployment | ✅ fertig | bestanden, 10.10.2026 |
 | 1 | Datenmodell und Speicher | ⬜ offen | – |
 | 2 | Kernlogik | ⬜ offen | – |
 | 3 | Onboarding und Startseite | ⬜ offen | – |
@@ -33,11 +33,11 @@ Legende: ⬜ offen · 🔄 in Arbeit · ✅ fertig · ⏸ pausiert · ❌ verwor
 - [x] Vite + TypeScript, ESLint, Prettier, Vitest
 - [x] npm-Skripte: `lint`, `typecheck`, `test`, `build`
 - [x] `vite-plugin-pwa` mit Manifest und Platzhalter-Icons
-- [x] GitHub-Actions-Workflow für GitHub Pages (geschrieben, noch nicht gelaufen)
-- [ ] Erster Push auf `main`, in den Repo-Einstellungen Pages-Quelle auf „GitHub Actions“ stellen, Deployment prüfen
+- [x] GitHub-Actions-Workflow für GitHub Pages
+- [x] Erster Push auf `main`, in den Repo-Einstellungen Pages-Quelle auf „GitHub Actions“ stellen, Deployment prüfen
 - [x] Architekturtest-Gerüst
-- [ ] Test auf dem iPhone: Home-Bildschirm, offline starten
-- [ ] Phasen-Check
+- [x] Test auf dem iPhone: Home-Bildschirm, offline starten
+- [x] Phasen-Check
 
 ---
 
@@ -66,6 +66,7 @@ Legende: ⬜ offen · 🔄 in Arbeit · ✅ fertig · ⏸ pausiert · ❌ verwor
 ## Offene Fragen
 - [x] Phase 0: Name des Repos bzw. der App – Nutzerin am 10.10.2026: ist egal, also bleibt `annasRauchApp` / „Rauchfrei“ (E11)
 - [ ] Phase 7: Endgültiges App-Icon (E15)
+- [ ] Phase 7: iOS-Systemhinweis „Flugmodus ausschalten“ beim Offline-Start – vermeidbar? (siehe Phasen-Check 0)
 - [ ] Phase 5: Möchte die Nutzerin eigene Sprüche ergänzen?
 - [ ] Phase 7: Hotline-Nummer und Zeiten vor Veröffentlichung auf rauchfrei-info.de gegenprüfen
 - [ ] Nach Phase 8: Umzug zu Netlify (Phase 9) und Sync (Phase 10) gewünscht?
@@ -89,6 +90,19 @@ _Vorlage:_
 Ergebnis: bestanden / nicht bestanden
 ```
 
+### Phase 0 – Gerüst und Deployment – 10.10.2026
+1. „Fertig, wenn“ erfüllt:                 Ja – Seite ist unter der GitHub-Pages-Adresse erreichbar. Nutzerin hat sie auf dem iPhone zum Home-Bildschirm hinzugefügt und im Flugmodus gestartet, die App erschien normal.
+2. Qualitätsprüfungen grün:                 Ja – lint, typecheck, test, build lokal und im GitHub-Actions-Lauf.
+3. core/ frei von DOM, Speicher, Date.now:  Ja – Architekturtest grün (`src/core/` ist noch leer).
+4. Keine externen Laufzeit-Anfragen:        Ja – Build nach fremden Adressen durchsucht, einzige Fundstelle ist ein Hinweistext in Workbox, kein Abruf. Der Netzwerk-Tab im Browser wurde nicht eigens angesehen.
+5. Ton-Regeln eingehalten:                  Ja – einziger Text ist die Manifest-Beschreibung.
+6. Schema-Änderung mit Migration und Test:  entfällt – noch kein Schema.
+7. Abweichungen dokumentiert:               Ja – E11 bis E15.
+8. Toter Code entfernt:                     Ja – keiner vorhanden.
+Ergebnis: bestanden
+
+Beobachtung beim iPhone-Test: Im Flugmodus zeigt iOS den Systemhinweis „Flugmodus ausschalten …“. Auslöser ist die Update-Prüfung des Service Workers beim Start (Anfrage an die eigene Adresse). Die App läuft trotzdem aus dem Cache. In Phase 7 prüfen, ob sich der Hinweis vermeiden lässt.
+
 ---
 
 ## Sitzungsprotokoll
@@ -106,3 +120,8 @@ Ergebnis: bestanden / nicht bestanden
 - Build lokal über `vite preview` ausgeliefert: Seite, Manifest, Service Worker und Icons unter `/annasRauchApp/` erreichbar. Keine externen Adressen im Build.
 - Noch nicht geprüft: Deployment auf GitHub Pages (noch nichts gepusht), Installation und Offline-Start auf dem iPhone.
 - Nächster Schritt: Repo-Name bestätigen, pushen, Pages aktivieren, iPhone-Test, Phasen-Check.
+
+### 10.10.2026 – Phase 0, Deployment
+- Commit `58aecc2` auf `main` gepusht. Erster Lauf scheiterte an `configure-pages`, weil Pages im Repo noch nicht aktiviert war. Nutzerin hat die Quelle auf „GitHub Actions“ gestellt, der Lauf ist danach grün.
+- Geprüft per Abruf: Seite, Service Worker, Manifest und alle vier Icons antworten unter https://annikalenneper.github.io/annasRauchApp/ mit 200, alle Pfade im HTML tragen das Präfix `/annasRauchApp/`.
+- Noch offen: Test auf dem iPhone (Home-Bildschirm, Offline-Start), danach Phasen-Check.
